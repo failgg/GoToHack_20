@@ -1,6 +1,9 @@
+import json
+
 from flask import render_template, flash, redirect, url_for, request, send_from_directory
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+from game_service import field
 
 from app import app
 from app.forms import LoginForm, RegisterForm, IndexForm
@@ -66,11 +69,11 @@ def send_static(path):
     return send_from_directory('static', path)
 
 
-@app.route('/game/<int:game_id>')
-def game(game_id):
-    return render_template('game.html', game_id=game_id)
+@app.route('/game')
+def game():
+    return render_template('game.html')
 
 
-@app.route('/api/get_initial_config')
+@app.route('/api/get_initial_config', methods=['POST'])
 def get_initial_config():
-    return
+    return json.dumps({'height': 16, 'width': 16, 'field': field})
