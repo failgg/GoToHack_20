@@ -1,0 +1,10 @@
+flask
+flask-wtf
+WTForms
+psycopg2-binary
+flask-sqlalchemy
+flask-migrate
+SQLAlchemy
+passlib
+bcrypt
+flask-login

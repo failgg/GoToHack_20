@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div class="form-container container">
+        <h1>Вход в систему</h1>
+        {{ wtf.quick_form(form) }}
+        <br>
+        <p>
+            <a href="{{ url_for('register') }}">Зарегистрироваться!</a>
+        </p>
+    </div>
+{% endblock %}

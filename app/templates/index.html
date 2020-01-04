@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block documentready %}
+{% endblock %}
+
+
+{% block custom_body_classes %}{% endblock %}
+
+
+{% block app_content %}
+    <div class="form-container container">
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}
