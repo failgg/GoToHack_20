@@ -1,0 +1,83 @@
+{% import "wtf.html" as wtf %}
+
+<!DOCTYPE html>
+<html{% block html_attribs %} lang="ru"{% endblock %}>
+{% block html %}
+    <head>
+        <title>{% block title %}{{ title|default }}{% endblock %}</title>
+
+        {% block metas %}
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta charset="UTF-8">
+        {% endblock %}
+
+        {% block styles %}
+            <link rel="stylesheet" href="{{ url_for('send_static', path='css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ url_for('send_static', path='css/mdb.min.css') }}">
+            <link rel="stylesheet" href="{{ url_for('send_static', path='css/style.css') }}">
+            <link rel="stylesheet" href="{{ url_for('send_static', path='css/Roboto.css') }}">
+            <link rel="stylesheet" href="{{ url_for('send_static', path='css/fontawesome-all.min.css') }}">
+        {% endblock %}
+    </head>
+    <body onload="brython()"{% block body_attribs %}{% endblock %}>
+    {% block body %}
+        {% block navbar %}
+            <nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-success">
+                <a class="navbar-brand" href="http://localhost">Game</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+                        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item {# active #}">
+                            <a class="nav-link" href="{{ url_for('index') }}">Главная</a>
+                        </li>
+                        {% if not current_user.is_anonymous %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Выход</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Войти</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        {% endblock %}
+        {% block content %}
+            <div class="my-3 mx-3 col-xs-6 d-flex flex-column h-100 justify-content-center align-items-center">
+                <div id="notifications"></div>
+                {% block app_content %}
+
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block scripts %}
+            <script type="text/javascript" src="{{ url_for('send_static', path='js/jquery-3.4.1.min.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('send_static', path='js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('send_static', path='js/popper.min.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('send_static', path='js/mdb.min.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('send_static', path='js/Notify.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('send_static', path='js/ace/ace.js') }}"></script>
+            <script type="text/javascript"
+                    src="{{ url_for('send_static', path='js/ace/ext-language_tools.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('send_static', path='js/brython.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('send_static', path='js/brython_stdlib.js') }}"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                Notify("{{ message }}");
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    {% block documentready %}
+                    {% endblock %}
+                });
+            </script>
+        {% endblock %}
+    {% endblock %}
+    </body>
+{% endblock %}
+</html>

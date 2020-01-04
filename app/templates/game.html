@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block documentready %}
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/python" src="{{ url_for('send_static', path='py/game.py') }}"></script>
+    <script type="text/javascript">
+        window.game_id = {{ game_id }};
+    </script>
+{% endblock %}
+
+
+{% block app_content %}
+    <canvas id="game"></canvas>
+{% endblock %}

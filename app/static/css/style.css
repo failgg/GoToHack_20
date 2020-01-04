@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+@media (min-width: 1200px) {
+    .form-container {
+        max-width: 50%;
+    }
+}
+
+.form-container {
+    width: 100%;
+}
+
+form {
+    width: 100%;
+}
+
+/* Notifications */
+
+#notifications {
+    cursor: pointer;
+}
+
+.alert .close:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.alert *, .alert ::after, .alert ::before {
+    box-sizing: border-box;
+}
+
+.alert .close {
+    float: right;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000000;
+    opacity: .7;
+}
