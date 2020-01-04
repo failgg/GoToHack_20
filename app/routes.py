@@ -71,6 +71,6 @@ def game(game_id):
     return render_template('game.html', game_id=game_id)
 
 
-@app.run('/api/get_initial_config')
+@app.route('/api/get_initial_config')
 def get_initial_config():
     return
